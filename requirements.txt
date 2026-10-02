@@ -1,2 +1,7 @@
+<<<<<<< HEAD
+=======
+streamlit>=1.35
+plotly>=5.20
+>>>>>>> f58f395a9c0a31c0df6aac6f939b15f671f395ed
 pypdf>=4.0
 python-docx>=1.1

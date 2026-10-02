@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Skill Gap Analyzer (Next.js + Python)
 
 Pick a target role, upload a resume or list your skills, and get a match score, the skills you're
@@ -29,3 +30,21 @@ Change `core/skills_data.py`, then run `npm run sync-catalog` to refresh `lib/ca
 ## Notes
 - Resume uploads are limited to 4 MB (Vercel's request limit). Scanned/image-only PDFs have no text to read.
 - Resumes are processed in memory and never stored.
+=======
+# Skill Gap Analyzer
+
+Tell it your skills (or upload a resume) and pick a target role. It shows your match score,
+the skills the market expects that you're missing, and a prioritized learning roadmap.
+
+## Run
+```bash
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+## Files
+- `app.py`: Streamlit UI
+- `parser.py`: PDF/DOCX/TXT reading and skill detection
+- `analyzer.py`: scoring, category balance, roadmap
+- `skills_data.py`: skill catalog and 10 role profiles (edit this to add roles or skills)
+>>>>>>> f58f395a9c0a31c0df6aac6f939b15f671f395ed
