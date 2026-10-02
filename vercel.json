@@ -1,0 +1,8 @@
+{
+  "functions": {
+    "api/*.py": {
+      "maxDuration": 15,
+      "excludeFiles": "{.next,node_modules,public,app,components,lib}/**"
+    }
+  }
+}

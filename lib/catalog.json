@@ -1,0 +1,417 @@
+{
+ "skills": {
+  "Python": {
+   "category": "Languages",
+   "weeks": 6,
+   "resource": "Python for Everybody (Coursera)"
+  },
+  "Java": {
+   "category": "Languages",
+   "weeks": 8,
+   "resource": "MOOC.fi Java Programming"
+  },
+  "JavaScript": {
+   "category": "Languages",
+   "weeks": 6,
+   "resource": "javascript.info"
+  },
+  "TypeScript": {
+   "category": "Languages",
+   "weeks": 3,
+   "resource": "TypeScript Handbook"
+  },
+  "R": {
+   "category": "Languages",
+   "weeks": 5,
+   "resource": "R for Data Science (book)"
+  },
+  "HTML/CSS": {
+   "category": "Web & APIs",
+   "weeks": 3,
+   "resource": "MDN Learn Web Development"
+  },
+  "React": {
+   "category": "Web & APIs",
+   "weeks": 5,
+   "resource": "react.dev tutorial"
+  },
+  "Node.js": {
+   "category": "Web & APIs",
+   "weeks": 4,
+   "resource": "The Odin Project: NodeJS"
+  },
+  "REST APIs": {
+   "category": "Web & APIs",
+   "weeks": 3,
+   "resource": "RESTful API design guide (Microsoft)"
+  },
+  "Django": {
+   "category": "Web & APIs",
+   "weeks": 4,
+   "resource": "Django official tutorial"
+  },
+  "FastAPI": {
+   "category": "Web & APIs",
+   "weeks": 2,
+   "resource": "FastAPI official tutorial"
+  },
+  "SQL": {
+   "category": "Databases",
+   "weeks": 4,
+   "resource": "Mode SQL Tutorial"
+  },
+  "MongoDB": {
+   "category": "Databases",
+   "weeks": 3,
+   "resource": "MongoDB University M001"
+  },
+  "Excel": {
+   "category": "Data & Analytics",
+   "weeks": 3,
+   "resource": "Excel Skills for Business (Coursera)"
+  },
+  "Statistics": {
+   "category": "Data & Analytics",
+   "weeks": 6,
+   "resource": "Khan Academy Statistics"
+  },
+  "Pandas": {
+   "category": "Data & Analytics",
+   "weeks": 3,
+   "resource": "Kaggle Pandas micro-course"
+  },
+  "NumPy": {
+   "category": "Data & Analytics",
+   "weeks": 2,
+   "resource": "NumPy quickstart"
+  },
+  "Data Visualization": {
+   "category": "Data & Analytics",
+   "weeks": 4,
+   "resource": "Tableau / Power BI free learning paths"
+  },
+  "ETL": {
+   "category": "Data & Analytics",
+   "weeks": 5,
+   "resource": "Data Engineering Zoomcamp"
+  },
+  "Apache Spark": {
+   "category": "Data & Analytics",
+   "weeks": 6,
+   "resource": "Databricks Academy (free)"
+  },
+  "Airflow": {
+   "category": "Data & Analytics",
+   "weeks": 3,
+   "resource": "Apache Airflow official tutorial"
+  },
+  "Data Warehousing": {
+   "category": "Data & Analytics",
+   "weeks": 4,
+   "resource": "Snowflake / BigQuery quickstarts"
+  },
+  "Machine Learning": {
+   "category": "Machine Learning",
+   "weeks": 10,
+   "resource": "Andrew Ng ML Specialization"
+  },
+  "Deep Learning": {
+   "category": "Machine Learning",
+   "weeks": 8,
+   "resource": "fast.ai Practical Deep Learning"
+  },
+  "PyTorch": {
+   "category": "Machine Learning",
+   "weeks": 4,
+   "resource": "PyTorch official tutorials"
+  },
+  "NLP & LLMs": {
+   "category": "Machine Learning",
+   "weeks": 6,
+   "resource": "Hugging Face NLP Course"
+  },
+  "MLOps": {
+   "category": "Machine Learning",
+   "weeks": 5,
+   "resource": "MLOps Zoomcamp"
+  },
+  "Git": {
+   "category": "Engineering Practices",
+   "weeks": 1,
+   "resource": "Pro Git (book)"
+  },
+  "Testing": {
+   "category": "Engineering Practices",
+   "weeks": 2,
+   "resource": "Test-Driven Development by Example"
+  },
+  "CI/CD": {
+   "category": "Engineering Practices",
+   "weeks": 3,
+   "resource": "GitHub Actions documentation"
+  },
+  "System Design": {
+   "category": "Engineering Practices",
+   "weeks": 8,
+   "resource": "Designing Data-Intensive Applications"
+  },
+  "Data Structures & Algorithms": {
+   "category": "Engineering Practices",
+   "weeks": 10,
+   "resource": "NeetCode roadmap"
+  },
+  "Docker": {
+   "category": "Cloud & DevOps",
+   "weeks": 2,
+   "resource": "Docker Get Started guide"
+  },
+  "Kubernetes": {
+   "category": "Cloud & DevOps",
+   "weeks": 6,
+   "resource": "Kubernetes Basics (kubernetes.io)"
+  },
+  "Terraform": {
+   "category": "Cloud & DevOps",
+   "weeks": 4,
+   "resource": "HashiCorp Terraform tutorials"
+  },
+  "AWS": {
+   "category": "Cloud & DevOps",
+   "weeks": 8,
+   "resource": "AWS Cloud Practitioner Essentials"
+  },
+  "Azure": {
+   "category": "Cloud & DevOps",
+   "weeks": 6,
+   "resource": "Microsoft Learn AZ-900"
+  },
+  "GCP": {
+   "category": "Cloud & DevOps",
+   "weeks": 6,
+   "resource": "Google Cloud Skills Boost"
+  },
+  "Linux": {
+   "category": "Cloud & DevOps",
+   "weeks": 4,
+   "resource": "Linux Journey"
+  },
+  "Monitoring": {
+   "category": "Cloud & DevOps",
+   "weeks": 3,
+   "resource": "Prometheus + Grafana getting started"
+  },
+  "Networking": {
+   "category": "Cloud & DevOps",
+   "weeks": 5,
+   "resource": "Computer Networking (Cisco NetAcad)"
+  },
+  "Cybersecurity Fundamentals": {
+   "category": "Security",
+   "weeks": 6,
+   "resource": "CompTIA Security+ / TryHackMe"
+  },
+  "SIEM & Threat Detection": {
+   "category": "Security",
+   "weeks": 5,
+   "resource": "Splunk Fundamentals (free)"
+  },
+  "Penetration Testing": {
+   "category": "Security",
+   "weeks": 8,
+   "resource": "TryHackMe Jr Penetration Tester"
+  },
+  "Cryptography": {
+   "category": "Security",
+   "weeks": 4,
+   "resource": "Cryptography I (Coursera)"
+  },
+  "Communication": {
+   "category": "Soft Skills",
+   "weeks": 4,
+   "resource": "Practice: write up & present your projects"
+  },
+  "Problem Solving": {
+   "category": "Soft Skills",
+   "weeks": 3,
+   "resource": "Showcase case studies in your portfolio"
+  },
+  "Agile & Scrum": {
+   "category": "Soft Skills",
+   "weeks": 1,
+   "resource": "Scrum Guide (free)"
+  }
+ },
+ "roles": {
+  "Data Scientist": {
+   "desc": "Turns messy data into models and decisions.",
+   "skills": {
+    "Python": 3,
+    "SQL": 3,
+    "Statistics": 3,
+    "Pandas": 3,
+    "Machine Learning": 3,
+    "NumPy": 2,
+    "Data Visualization": 2,
+    "Deep Learning": 2,
+    "Git": 2,
+    "Communication": 2,
+    "Problem Solving": 2,
+    "NLP & LLMs": 1,
+    "Apache Spark": 1,
+    "AWS": 1,
+    "Excel": 1
+   }
+  },
+  "Data Analyst": {
+   "desc": "Finds answers in business data and explains them clearly.",
+   "skills": {
+    "SQL": 3,
+    "Excel": 3,
+    "Data Visualization": 3,
+    "Communication": 3,
+    "Statistics": 2,
+    "Python": 2,
+    "Pandas": 2,
+    "Problem Solving": 2,
+    "ETL": 1,
+    "R": 1
+   }
+  },
+  "Machine Learning Engineer": {
+   "desc": "Ships and maintains ML models in production.",
+   "skills": {
+    "Python": 3,
+    "Machine Learning": 3,
+    "MLOps": 3,
+    "Deep Learning": 2,
+    "PyTorch": 2,
+    "Docker": 2,
+    "Git": 2,
+    "Data Structures & Algorithms": 2,
+    "NLP & LLMs": 2,
+    "AWS": 1,
+    "Kubernetes": 1,
+    "CI/CD": 1
+   }
+  },
+  "Backend Developer": {
+   "desc": "Builds the APIs, services and databases behind apps.",
+   "skills": {
+    "REST APIs": 3,
+    "SQL": 3,
+    "Git": 3,
+    "Python": 2,
+    "System Design": 2,
+    "Docker": 2,
+    "Testing": 2,
+    "CI/CD": 2,
+    "Data Structures & Algorithms": 2,
+    "Java": 1,
+    "Node.js": 1,
+    "MongoDB": 1,
+    "Django": 1,
+    "FastAPI": 1,
+    "Linux": 1,
+    "AWS": 1
+   }
+  },
+  "Frontend Developer": {
+   "desc": "Builds fast, accessible interfaces people enjoy using.",
+   "skills": {
+    "JavaScript": 3,
+    "HTML/CSS": 3,
+    "React": 3,
+    "Git": 3,
+    "TypeScript": 2,
+    "REST APIs": 2,
+    "Testing": 2,
+    "Problem Solving": 2,
+    "Node.js": 1,
+    "Agile & Scrum": 1
+   }
+  },
+  "Full Stack Developer": {
+   "desc": "Owns features from the database to the browser.",
+   "skills": {
+    "JavaScript": 3,
+    "REST APIs": 3,
+    "Git": 3,
+    "React": 2,
+    "Node.js": 2,
+    "HTML/CSS": 2,
+    "SQL": 2,
+    "TypeScript": 1,
+    "MongoDB": 1,
+    "Docker": 1,
+    "Testing": 1,
+    "System Design": 1,
+    "CI/CD": 1,
+    "AWS": 1
+   }
+  },
+  "DevOps Engineer": {
+   "desc": "Automates building, deploying and running software.",
+   "skills": {
+    "Linux": 3,
+    "Docker": 3,
+    "Kubernetes": 3,
+    "CI/CD": 3,
+    "Git": 3,
+    "Terraform": 2,
+    "AWS": 2,
+    "Python": 2,
+    "Monitoring": 2,
+    "Networking": 1,
+    "Azure": 1
+   }
+  },
+  "Cloud Engineer": {
+   "desc": "Designs and operates secure, scalable cloud infrastructure.",
+   "skills": {
+    "AWS": 3,
+    "Linux": 2,
+    "Terraform": 2,
+    "Networking": 2,
+    "Docker": 2,
+    "CI/CD": 2,
+    "Azure": 1,
+    "GCP": 1,
+    "Kubernetes": 1,
+    "Python": 1,
+    "Cybersecurity Fundamentals": 1,
+    "Monitoring": 1
+   }
+  },
+  "Data Engineer": {
+   "desc": "Builds the pipelines and warehouses analysts rely on.",
+   "skills": {
+    "Python": 3,
+    "SQL": 3,
+    "ETL": 3,
+    "Data Warehousing": 3,
+    "Apache Spark": 2,
+    "Airflow": 2,
+    "AWS": 2,
+    "Git": 2,
+    "Docker": 1,
+    "Linux": 1,
+    "MongoDB": 1
+   }
+  },
+  "Cybersecurity Analyst": {
+   "desc": "Detects, investigates and prevents security threats.",
+   "skills": {
+    "Cybersecurity Fundamentals": 3,
+    "Networking": 3,
+    "SIEM & Threat Detection": 3,
+    "Linux": 2,
+    "Penetration Testing": 2,
+    "Cryptography": 2,
+    "Communication": 2,
+    "Problem Solving": 2,
+    "Python": 1,
+    "AWS": 1
+   }
+  }
+ }
+}
