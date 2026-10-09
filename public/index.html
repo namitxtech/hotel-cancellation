@@ -1,0 +1,86 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hotel Cancellation Analysis</title>
+<style>
+:root{--bg:#f3f6f9;--ink:#12263a;--mute:#5d7184;--line:#d6dee6;--card:#fff;--amber:#e08a00;--blue:#1f5f8b;--ok:#2e7d5b;--bad:#b3392f}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "Segoe UI",system-ui,sans-serif}
+header{padding:28px 32px 8px;max-width:1200px;margin:auto}
+h1{font-size:26px;margin:0 0 4px;letter-spacing:-.01em}header p{margin:0;color:var(--mute);max-width:70ch}
+main{max-width:1200px;margin:auto;padding:16px 32px 48px;display:grid;gap:16px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px 16px}
+.kpi b{display:block;font-size:28px;font-variant-numeric:tabular-nums}.kpi span{color:var(--mute);font-size:13px}
+.kpi.hot b{color:var(--amber)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:16px}
+.card h2{font-size:16px;margin:0 0 2px}.card .sub{color:var(--mute);font-size:13px;margin:0 0 10px}
+canvas{max-height:260px}
+.predict{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;align-items:end}
+label{font-size:13px;color:var(--mute);display:grid;gap:3px}
+input,select{font:inherit;padding:8px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--ink)}
+button{font:inherit;font-weight:600;padding:9px 14px;border:0;border-radius:4px;background:var(--blue);color:#fff;cursor:pointer}
+button:hover{background:#174a6d}:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+#result{margin-top:14px;padding:12px 14px;border-left:5px solid var(--line);background:#f8fafc;display:none}
+#result b{font-size:22px}
+table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left}
+.w{height:8px;background:var(--amber);border-radius:2px}.w.n{background:var(--ok)}
+.rec li{margin-bottom:6px}
+</style></head><body>
+<header><h1>Hotel Cancellation Analysis</h1>
+<p>Which bookings cancel, how much revenue it costs, and what the hotel can do about it. Data cleaned with Python, queried with SQL, scored with a logistic regression model.</p></header>
+<main>
+<section class="kpis" id="kpis" aria-label="Key numbers"></section>
+<section class="card"><h2>Check a booking</h2><p class="sub">Runs the trained Python model on the details you enter.</p>
+<div class="predict">
+<label>Lead time (days)<input id="lead_time" type="number" min="0" value="200"></label>
+<label>Price per night<input id="adr" type="number" min="1" value="110"></label>
+<label>Nights<input id="total_nights" type="number" min="1" value="3"></label>
+<label>Hotel<select id="hotel"><option>City Hotel</option><option>Resort Hotel</option></select></label>
+<label>Deposit<select id="deposit_type"><option>No Deposit</option><option>Non Refund</option><option>Refundable</option></select></label>
+<label>Booking channel<select id="market_segment"><option>Online TA</option><option>Offline TA/TO</option><option>Direct</option><option>Corporate</option><option>Groups</option></select></label>
+<label>Past cancellations<input id="previous_cancellations" type="number" min="0" value="0"></label>
+<button id="go">Check cancellation risk</button></div>
+<div id="result" aria-live="polite"></div></section>
+<section class="grid">
+<div class="card"><h2>Cancellation rate by lead time</h2><p class="sub">Days between booking and arrival</p><canvas id="c1"></canvas></div>
+<div class="card"><h2>Cancellation rate by booking channel</h2><p class="sub">Percent of bookings cancelled</p><canvas id="c2"></canvas></div>
+<div class="card"><h2>Cancellation rate by deposit type</h2><p class="sub">Percent of bookings cancelled</p><canvas id="c3"></canvas></div>
+<div class="card"><h2>Revenue lost by arrival month</h2><p class="sub">Price per night × nights, cancelled bookings only</p><canvas id="c4"></canvas></div>
+<div class="card"><h2>What drives cancellations</h2><p class="sub">Model weights. Bars to the right raise risk, left lower it.</p><table id="drivers"></table></div>
+<div class="card"><h2>Riskiest groups</h2><p class="sub">Channel and lead time combined</p><table id="combo"></table></div>
+</section>
+<section class="grid"><div class="card"><h2>Recommendations</h2><ul class="rec" id="rec"></ul></div>
+<div class="card"><h2>Data cleaning log</h2><p class="sub">Rows removed before analysis</p><table id="clog"></table>
+<p class="sub" id="metrics" style="margin-top:12px"></p></div></section>
+</main>
+<script src="/vendor/chart.umd.js"></script>
+<script>
+const $=id=>document.getElementById(id), money=n=>"$"+Number(n).toLocaleString();
+const nice=s=>s.replace(/^(hotel|deposit_type|market_segment|customer_type)_/,"").replace(/_/g," ");
+function bar(id,rows,key,color,fmt){new Chart($(id),{type:"bar",data:{labels:rows.map(r=>r.label),datasets:[{data:rows.map(r=>r[key]),backgroundColor:color,borderRadius:3}]},
+ options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:fmt||(v=>v+"%")}}}}})}
+fetch("/api/results").then(r=>r.json()).then(d=>{
+ if(d.error){$("kpis").textContent=d.error;return}
+ const k=d.overall_kpis[0];
+ $("kpis").innerHTML=[["Bookings analysed",k.total_bookings.toLocaleString()],["Cancellation rate",k.cancel_rate+"%","hot"],
+  ["Revenue lost",money(k.revenue_lost),"hot"],["Share of revenue lost",(100*k.revenue_lost/k.potential_revenue).toFixed(1)+"%"]]
+  .map(([l,v,c])=>`<div class="kpi ${c||""}"><b>${v}</b><span>${l}</span></div>`).join("");
+ bar("c1",d.by_lead_time,"cancel_rate","#e08a00");bar("c2",d.by_segment,"cancel_rate","#1f5f8b");
+ bar("c3",d.by_deposit,"cancel_rate","#1f5f8b");bar("c4",d.by_month,"revenue_lost","#e08a00",v=>"$"+(v/1000)+"k");
+ const f=[...d.model_metrics.top_risk_factors,...d.model_metrics.top_protective_factors];
+ $("drivers").innerHTML=f.map(x=>`<tr><td>${nice(x.feature)}</td><td style="width:45%"><div class="w ${x.weight<0?"n":""}" style="width:${Math.min(100,Math.abs(x.weight)*40)}%;margin-${x.weight<0?"right":"left"}:auto"></div></td></tr>`).join("");
+ $("combo").innerHTML="<tr><th>Channel</th><th>Lead</th><th>Bookings</th><th>Cancelled</th></tr>"+d.high_risk_combo.map(r=>`<tr><td>${r.market_segment}</td><td>${r.lead_group}</td><td>${r.bookings}</td><td>${r.cancel_rate}%</td></tr>`).join("");
+ const L=d.by_lead_time,top=d.by_segment[0],dep=d.by_deposit[0];
+ $("rec").innerHTML=[`Bookings made more than 180 days ahead cancel at ${L[L.length-1].cancel_rate}%, against ${L[0].cancel_rate}% for the last 30 days. Ask for a deposit on long-lead bookings.`,
+  `${top.label} has the highest cancellation rate (${top.cancel_rate}%). Offer direct-booking perks to move guests off this channel.`,
+  `Overbook slightly for high-risk segments and months, using the model's risk score to pick which bookings.`,
+  `Send reconfirmation reminders to every booking scored High or Medium.`].map(t=>`<li>${t}</li>`).join("");
+ $("clog").innerHTML=Object.entries(d.cleaning_log).map(([a,b])=>`<tr><td>${a.replace(/_/g," ")}</td><td>${b.toLocaleString()}</td></tr>`).join("");
+ const m=d.model_metrics;$("metrics").textContent=`Model on unseen data: accuracy ${m.accuracy}, precision ${m.precision}, recall ${m.recall}, ROC-AUC ${m.roc_auc}.`;
+});
+$("go").onclick=async()=>{const body={};["lead_time","adr","total_nights","hotel","deposit_type","market_segment","previous_cancellations"].forEach(i=>body[i]=$(i).value);
+ const r=await fetch("/api/predict",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}),d=await r.json(),el=$("result");
+ el.style.display="block";if(d.error){el.textContent=d.error;return}
+ el.style.borderColor=d.risk=="High"?"var(--bad)":d.risk=="Medium"?"var(--amber)":"var(--ok)";
+ el.innerHTML=`<b>${(d.probability*100).toFixed(0)}% chance of cancelling (${d.risk} risk)</b><br>${d.advice}`};
+</script></body></html>
